@@ -24,10 +24,27 @@ import matplotlib.pyplot as plt
 import math
 import seed_finder
 
+
+import sys
+
+if(len(sys.argv) == 3):
+    
+    r=int(sys.argv[2]) # Number of influence tags
+    k=int(sys.argv[1]) # Number of Influencial users
+
+if(len(sys.argv) != 3):
+    
+    k=5 # Number of influencial users
+    r=2# Number of Influence tags
+
+
 probability_of_influence=pickle.load(open("dict_probability_of_influence","rb"))
-seed,influenced_member= seed_finder.func(5)
+seed= seed_finder.func(k)
 
 
+
+
+print("The top influencial members are",seed)
 def remove_all_other_nodes(probability_of_influence,seed):
     # Keep only the seeds in the graph
     dict1={}
@@ -42,7 +59,7 @@ def remove_all_other_nodes(probability_of_influence,seed):
         dict1[key]= probability_of_influence[key]               
                 #if follower in influenced_member:
                 #dict1[key]=probability_of_influence[key]
-        print("")
+        #print("")
     #print("")
     return dict1,tags
         
@@ -50,9 +67,12 @@ dict_only_seed_graph,tags=remove_all_other_nodes(probability_of_influence,seed)
 
 def best_tags(dict_only_seed_graph,tags,r):
     best_tag=set()
-    mc=10
+    mc=20
     influenced_member_2=set()
+    times=5
+    times_going=0
     while len(best_tag)<r:
+        
         dict_tag={} # key tag and value number of members influenced
         for tag in tags:
              # number of member influenced
@@ -93,10 +113,17 @@ def best_tags(dict_only_seed_graph,tags,r):
             dict_tag[tag]=sum(list1)/len(list1) 
         sorted_dict = dict(sorted(dict_tag.items(), key=lambda item: item[1], reverse=True))
         #print(sorted_dict)
-        if (len(seed)==r):
-            print("")
-        first_key = next(iter(sorted_dict))
-        best_tag.add(first_key)
-        print(best_tag)        
         
-best_tags=best_tags(dict_only_seed_graph,tags,2)        
+        first_key = next(iter(sorted_dict))
+        if first_key in best_tag:
+            times_going=times_going+1
+        else:
+            times_going=0
+        best_tag.add(first_key)
+        if times_going ==times:
+            break
+        #print(best_tag)
+    return best_tag        
+        
+best_tags=best_tags(dict_only_seed_graph,tags,r)  
+print("Best tags are ",best_tags)      
