@@ -1,5 +1,5 @@
 # Influence-embedding
-This code is for the paper titled "On the Badge Aware Influence Representation Learning & Influencer Detection in Social Networks".
+This code is implementation of Badge2vec for the paper titled "On the Badge Aware Influence Representation Learning & Influencer Detection in Social Networks".
 
 network.py is the multitask learning model. It is trained for each badge and the saved model for each badge is stored in the folder "saved model".
 
@@ -9,4 +9,8 @@ file "dict_probability_of_influence".
 
 seed_finder.py finds the k best influencers.
 tag_finder.py finds the r best badges for the k best influencer.
+
+Run `python tag_finder.py' to find top 5 influencial members and top 2 influence badges.
+Run `python tag_finder.py number_of_influencial_users number_of_influence_tags' to get the output as top-k influencial nodes and top-r influence badges.
+
 
