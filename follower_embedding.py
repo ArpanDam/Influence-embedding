@@ -4,21 +4,21 @@ Created on Thu Jan 25 15:17:25 2024
 
 @author: HP
 """
-import tensorflow as tf
+#import tensorflow as tf
 import torch
-from torch.utils.data import random_split,DataLoader
-import torchvision.transforms as transforms
-from torchvision.datasets import CIFAR10
+#from torch.utils.data import random_split,DataLoader
+#import torchvision.transforms as transforms
+#from torchvision.datasets import CIFAR10
 from torch import nn
-import numpy as np
+#import numpy as np
 import torch.optim as optim
 import model
 #import input1
 #import output
 import pickle
-from numpy import array
-from numpy.linalg import norm
-import matplotlib.pyplot as plt
+#from numpy import array
+#from numpy.linalg import norm
+#import matplotlib.pyplot as plt
 import os
 
 folder_path = '\saved model'

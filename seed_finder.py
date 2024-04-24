@@ -6,24 +6,24 @@ Created on Sun Jan 28 10:42:50 2024
 """
 
 
-import tensorflow as tf
-import torch
+#import tensorflow as tf
+#import torch
 #from torch.utils.data import random_split,DataLoader
 #import torchvision.transforms as transforms
 #from torchvision.datasets import CIFAR10
-from torch import nn
-import numpy as np
-import torch.optim as optim
+#from torch import nn
+#import numpy as np
+#import torch.optim as optim
 import random
-from random import uniform
+#from random import uniform
 import pickle
 #from numpy.linalg import norm
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 #import embedding_capture_influenced
 #import embedding_capture_influencial
-import matplotlib.pyplot as plt
-import math
+#import matplotlib.pyplot as plt
+#import math
 
 
 #influencial_embed=embedding_capture_influencial.influencial_embeding()

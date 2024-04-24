@@ -6,18 +6,18 @@ Created on Wed Jan 24 01:32:39 2024
 """
 
 import tensorflow as tf
-import torch
-from torch.utils.data import random_split,DataLoader
-import torchvision.transforms as transforms
-from torchvision.datasets import CIFAR10
-from torch import nn
-import numpy as np
-import torch.optim as optim
+#import torch
+#from torch.utils.data import random_split,DataLoader
+#import torchvision.transforms as transforms
+#from torchvision.datasets import CIFAR10
+#from torch import nn
+#import numpy as np
+#import torch.optim as optim
 
 import pickle
-from numpy.linalg import norm
+#from numpy.linalg import norm
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import follower_embedding
 import influencial_embedding_v2
 import math
@@ -51,7 +51,7 @@ for key in edge_probability_career:
 dict1={}          
 for tag in tags:
     if tag not in tags_least and tag not in "Anyone craving to play a game of real MAHJONG?" and tag not in "Community Service for Age 50's+: Various Projects": 
-        print(tag)
+        print("calculating probablity for badge",tag)
         
         if tag =="\"Cloud Computing\" How to use it for your business":
             tag ="Cloud Computing"
@@ -66,7 +66,7 @@ for tag in tags:
                 follower=influenced
                 follower_embedding_follower=follower_embedding_tag[follower]
                 dot_product_result=dot_product(influencer_embedding, follower_embedding_follower)
-                probability=sigmoid(dot_product_result)
+                probability=sigmoid(dot_product_result) # here calculating the probablity
                 dict2={}
                 dict2[follower]=[(probability,tag)]
                 if influencer in dict1:
@@ -78,7 +78,7 @@ for tag in tags:
                         #list1.append(tag)
                         dict3[follower]=list1
                         dict1[influencer]=dict3
-                        print("")
+                        
                     else:
                         list1=[]
                         list1.append((probability,tag))
@@ -87,60 +87,16 @@ for tag in tags:
                         dict3[follower]=list1
                         dict1[influencer]=dict3
                         
-                        print("")
+                        
                 else:
                     dict1[influencer]=dict2
-                    print("")
+                    
                         
                         
                 
         #dot_product_result=dot_product(influencer_embedding, follower_embedding)
         #probability=sigmoid(dot_product_result)
-        print("")
+        
 
-#pickle.dump(dict1, open('dict_probability_of_influence', 'wb'))
-
-
-
-
-#def cross_product(vector1,vector2):
-'''    
-def softmax_scalar(x):
-    return 1 / (1 + np.exp(-x))
-'''
-
-
-'''
-def sotmax(logits):
-    scalar_value = logits.numpy()
-    return 1 / (1 + np.exp(-scalar_value))
-    #softmax_output = tf.nn.softmax(logits)
-    #return softmax_output
-
-'''
-'''
-influenced_multiple_hop=pickle.load(open("influenced_multiple_hop","rb"))
-
-dict_probability_of_influence={} # key influencer and value a list of tuple containing influenced member and probability
-
-
-
-for key in influenced_multiple_hop:
-    for follower in influenced_multiple_hop[key]:
-        influencer_embedding=influencial_embed[key]
-        follower_embedding=follower_embed[follower]
-        dot_product_result=dot_product(influencer_embedding, follower_embedding)
-        probability=sigmoid(dot_product_result)
-        if key in dict_probability_of_influence:
-            list1=dict_probability_of_influence[key]
-            list1.append((follower,probability))
-            dict_probability_of_influence[key]=list1                
-        else:
-            list1=[]
-            list1.append((follower,probability))
-            dict_probability_of_influence[key]=list1             
- 
-pickle.dump(dict_probability_of_influence, open('dict_probability_of_influence', 'wb'))'''
-#pickle.dump(cosine_embedding_good_influencer, open('cosine_embedding_good_influencer_no_hidden.dat', 'wb'))
-#pickle.dump(cosine_embedding_middle_influencer, open('cosine_embedding_middle_influencer_no_hidden.dat', 'wb'))         
+#pickle.dump(dict1, open('dict_probability_of_influence', 'wb')) # saving the badge wise probablity of influence
 

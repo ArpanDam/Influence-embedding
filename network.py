@@ -6,19 +6,19 @@ Created on Tue Feb  6 13:02:14 2024
 """
 
 
-import tensorflow as tf
+#import tensorflow as tf
 import torch
-from torch.utils.data import random_split,DataLoader
-import torchvision.transforms as transforms
-from torchvision.datasets import CIFAR10
+#from torch.utils.data import random_split,DataLoader
+#import torchvision.transforms as transforms
+#from torchvision.datasets import CIFAR10
 from torch import nn
-import numpy as np
+#import numpy as np
 import torch.optim as optim
 #import input1
 #import output
 import pickle
 #import input_cascade
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 import model
 
@@ -87,7 +87,7 @@ for tag in tags:
     #if tag == "Public Speaking as a Means to Market your Business":
     #flag=0
     input1,target,cascade=model.input_output_func(tag)
-    print(tag)
+    print("Training for badge ",tag)
     
     for key in input1:
         input_tensor=input1[key]
@@ -104,7 +104,7 @@ for tag in tags:
         optimizer = optim.Adam(mlp.parameters(), lr=0.001)
         break
     #input1,target=model.input_output_func(tag) 
-    print(mlp)
+    #print(mlp)
     for epoch in range(max_epoch):
         loss_list=[]
         mlp.train()
@@ -133,46 +133,5 @@ for tag in tags:
             loss_list.append(loss)
         print("For epoch",epoch,"loss is ",sum(loss_list)/len(loss_list));
     print("Final loss of tag "+tag+" is ",sum(loss_list)/len(loss_list))
-    '''
-    if tag == "\"Cloud Computing\" How to use it for your business":
-        tag="Cloud Computing How to use it for your business"
-        torch.save(mlp.state_dict(), tag+'saved_model_0.001.pth')
-    else:
-        torch.save(mlp.state_dict(), tag+'saved_model_0.001.pth')'''
-    torch.save(mlp.state_dict(), tag+'saved_model_0.001.pth')    
+    #torch.save(mlp.state_dict(), tag+'saved_model_0.001.pth')    Saving the model
     
-    '''
-    for epoch in range(max_epoch):
-        loss_list=[]
-        mlp.train()
-        for key in influenced_multiple_hop:
-            input_tensor=inputs[key]
-            reshaped_input_tensor=input_tensor.view(1, -1)
-            target_tensor=targets[key]
-            reshaped_target_tensor=target_tensor.view(1, -1)
-            #optimizer.zero_grad()
-            outputs_influenced = mlp(reshaped_input_tensor,task_id=1)
-            #loss = criterion(outputs, reshaped_target_tensor)
-            loss_influenced = infuenced_loss_fn(outputs_influenced, reshaped_target_tensor)
-            
-            # FInd the cascade length 
-            
-            if key == 48648352:
-                print("")
-                
-            target_cascade_length=cascade_mapping[key]
-            outputs_cascade = mlp(reshaped_input_tensor,task_id=2)
-            target_cascade_length = torch.tensor(target_cascade_length)
-            loss_cascade = cascade_loss_fn(outputs_cascade, target_cascade_length)
-            
-            loss = loss_influenced + loss_cascade
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            
-            
-            loss_list.append(loss)
-        
-        print("For epoch",epoch,"loss is ",sum(loss_list)/len(loss_list));
-        current_loss.append(sum(loss_list)/len(loss_list)) 
-        '''
