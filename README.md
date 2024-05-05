@@ -18,4 +18,6 @@ To train the model again -> Run `network.py'
 
 To complete the entire process of training the model, finding probablity of influence and find the top influencers and top badges - Run python network.py && python probability_of_influence.py && python tag_finder.py
 
+A dummy data is provided on which this code is implemented
+
 
